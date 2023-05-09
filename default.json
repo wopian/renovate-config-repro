@@ -1,0 +1,94 @@
+{
+  "extends": [
+    "config:base",
+    ":enableRenovate",
+    ":separateMajorReleases",
+    ":combinePatchMinorReleases",
+    ":renovatePrefix",
+    ":semanticCommits",
+    ":semanticCommitTypeAll(build)",
+    ":rebaseStalePrs",
+    ":prImmediately",
+    ":prHourlyLimitNone",
+    ":ignoreUnstable",
+    ":updateNotScheduled",
+    ":npm",
+    ":docker",
+    ":labels(Type: Maintenance,Priority: 3 - Medium)",
+    ":reviewer(team:backend)",
+    ":dependencyDashboard",
+    ":timezone(Europe/London)",
+    "docker:enableMajor",
+    "replacements:all",
+    "npm:unpublishSafe",
+    "group:recommended",
+    "group:monorepos",
+    "group:definitelyTyped",
+    "group:kubernetes",
+    "group:linters",
+    "group:unitTest",
+    "group:test"
+  ],
+  "commitMessageTopic": "{{prettyDepType}} {{depName}}",
+  "commitMessageExtra": "to {{{newValue}}}",
+  "postUpdateOptions": ["npmDedupe", "yarnDedupeHighest"],
+  "rangeStrategy": "pin",
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "prPriority": -1
+    },
+    {
+      "matchPackagePatterns": ["@angular", "@angular-devkit", "@angular-eslint"],
+      "groupName": "angular",
+      "prPriority": 2
+    },
+    {
+      "matchPackagePatterns": ["@vueuse"],
+      "groupName": "vueuse"
+    },
+    {
+      "matchPackagePatterns": ["^cypress", "@cypress", "@percy"],
+      "groupName": "cypress"
+    },
+    {
+      "matchPackagePatterns": ["^vite", "@vitejs"],
+      "groupName": "vite"
+    },
+    {
+      "matchPackagePatterns": ["^awilix"],
+      "groupName": "awilix"
+    },
+    {
+      "matchPackagePatterns": ["jest", "babel-jest", "@types/jest"],
+      "matchSourceUrlPrefixes": [
+        "https://github.com/kulshekhar/ts-jest"
+      ],
+      "groupName": "test packages"
+    },
+    {
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "prPriority": 10
+    },
+    {
+      "matchDatasources": ["npm"],
+      "stabilityDays": 0
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": "every 2 weeks before 7am on Monday"
+  },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["Type: Security", "Priority: 1 - Critical"],
+    "transitiveRemediation": true
+  },
+  "osvVulnerabilityAlerts": true,
+  "prConcurrentLimit": 1,
+  "schedule": [
+    "after 7am every weekday and before 5pm every weekday"
+  ],
+  "configMigration": true,
+  "ignoreDeps": ["mongoose"]
+}

@@ -1,0 +1,3 @@
+{
+  "extends": ["local>wopian/renovate-config-repro", ":preserveSemverRanges"]
+}
