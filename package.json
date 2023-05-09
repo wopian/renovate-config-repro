@@ -15,7 +15,7 @@
     "@babel/plugin-syntax-import-assertions": "^7.20.0",
     "@babel/preset-env": "^7.20.2",
     "jest": "29.5.0",
-    "renovate": "~35.61.0"
+    "renovate": "~35.62.0"
   },
   "jest": {
     "testEnvironment": "node"
